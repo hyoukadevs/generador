@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de Contraseñas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #1e1e2f, #2a2a40);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #2f2f4f;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      width: 350px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .password-box {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    #password {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px 0 0 8px;
+      outline: none;
+    }
+
+    button {
+      background-color: #4e89ff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 0 8px 8px 0;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3c6fd1;
+    }
+
+    .length-label {
+      margin-top: 10px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .length-value {
+      font-weight: bold;
+      color: #ffdf6c;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Generador de Contraseñas</h1>
+    
+    <div class="password-box">
+      <input type="text" id="password" readonly placeholder="Tu contraseña segura">
+      <button onclick="generatePassword()">🔄</button>
+    </div>
+
+    <label class="length-label">Longitud: <span class="length-value" id="lengthValue">12</span></label>
+    <input type="range" id="lengthRange" min="6" max="30" value="12" oninput="updateLength()">
+  </div>
+
+  <script>
+    function generatePassword() {
+      const length = document.getElementById('lengthRange').value;
+      const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?";
+      let password = "";
+
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * chars.length);
+        password += chars[randomIndex];
+      }
+
+      document.getElementById('password').value = password;
+    }
+
+    function updateLength() {
+      const length = document.getElementById('lengthRange').value;
+      document.getElementById('lengthValue').innerText = length;
+    }
+  </script>
+</body>
+</html>
